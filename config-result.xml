@@ -1,0 +1,63 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<hudson>
+  <disabledAdministrativeMonitors>
+    <string>hudson.node_monitors.MonitorMarkedNodeOffline</string>
+    <string>hudson.diagnosis.TooManyJobsButNoView</string>
+    <string>OldData</string>
+    <string>jenkins.security.QueueItemAuthenticatorMonitor</string>
+  </disabledAdministrativeMonitors>
+  <version>2.289.1</version>
+  <numExecutors>0</numExecutors>
+  <mode>EXCLUSIVE</mode>
+  <useSecurity>true</useSecurity>
+  <authorizationStrategy class="com.michelin.cio.hudson.plugins.rolestrategy.RoleBasedAuthorizationStrategy">
+    <roleMap type="projectRoles">
+      <role name="AppLications1Test-QA" pattern="test-folder/Applications/Daily|test-folder/Applications/DevFull|test-folder/Applications/DevQuick|test-folder/Applications/QA|test-folder/Applications/UnitTests">
+        <permissions>
+          <permission>hudson.model.Item.Cancel</permission>
+          <permission>hudson.model.Item.Read</permission>
+          <permission>hudson.model.Item.Workspace</permission>
+          <permission>hudson.model.Item.Build</permission>
+          <permission>hudson.model.Item.Discover</permission>
+          <permission>hudson.model.Item.ViewStatus</permission>
+        </permissions>
+        <assignedSIDs>
+          <sid>AppLicationsTest</sid>
+        </assignedSIDs>
+      </role>
+      <role name="Aplications3Test-Dev" pattern="arcade/applications-Dev/Additional.*">
+        <permissions>
+          <permission>hudson.model.Item.Cancel</permission>
+          <permission>hudson.model.Item.Read</permission>
+          <permission>hudson.model.Item.Workspace</permission>
+          <permission>hudson.model.Item.Build</permission>
+          <permission>hudson.model.Item.Discover</permission>
+          <permission>hudson.model.Item.ViewStatus</permission>
+        </permissions>
+        <assignedSIDs>
+          <sid>Applications-Dev</sid>
+        </assignedSIDs>
+      </role>
+      <role name="Applications242Test-Prod" pattern="Applications-Prod/Additional.*">
+        <permissions>
+          <permission>hudson.model.Item.Read</permission>
+          <permission>hudson.model.Item.Workspace</permission>
+          <permission>hudson.model.Item.Discover</permission>
+          <permission>hudson.model.Item.ViewStatus</permission>
+        </permissions>
+        <assignedSIDs>
+          <sid>Applications-Prod</sid>
+        </assignedSIDs>
+      </role>
+    </roleMap>
+    <roleMap type="slaveRoles">
+      <role name="NodeUser" pattern="slave.*">
+        <permissions>
+          <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View</permission>
+          <permission>hudson.model.Computer.Build</permission>
+        </permissions>
+        <assignedSIDs/>
+      </role>
+    </roleMap>
+  </authorizationStrategy>
+</hudson>
